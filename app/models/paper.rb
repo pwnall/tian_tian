@@ -30,9 +30,12 @@ class Paper < ActiveRecord::Base
   # The size of a square character cell, in cm.
   validates :cell_size, :numericality => { :greater_than_or_equal_to => 0 },
                          :presence => true
-  # The space between two rows of cells, in cm.
-  validates :row_spacing, :numericality => { :greater_than_or_equal_to => 0 },
-                          :presence => true
+  # The space between two groups of rows cells, in cm.
+  validates :group_spacing, :numericality => { :greater_than_or_equal_to => 0 },
+                            :presence => true
+  # The number of rows in a group.
+  validates :group_rows, :presence => true, :numericality =>
+      { :greater_than => 0, :only_integer => true }
 
   # Number of horizontal guide lines in a cell.
   validates :horizontal_guides, :presence => true, :numericality =>
@@ -67,11 +70,15 @@ class Paper < ActiveRecord::Base
   
   # Draws the grid on a PDF document.
   def pdf_grid(pdf)
-    rows = self.grid_rows
+    groups = self.grid_row_groups
   
-    0.upto(rows - 1) do |row|
-      pdf_grid_row pdf, rows - row, margin_bottom_pdf +
-                   (cell_size_pdf + row_spacing_pdf) * row
+    0.upto(groups - 1) do |group|
+      0.upto(group_rows - 1) do |row|
+        pdf_grid_row pdf, group_rows * (groups - group) - row,
+            margin_bottom_pdf +
+            (cell_size_pdf * group_rows + group_spacing_pdf) * group +
+            cell_size_pdf * row
+      end
     end
   end
   
@@ -115,13 +122,21 @@ class Paper < ActiveRecord::Base
     end
   end
   
-  # Number of grid rows.
-  def grid_rows
+  # Number of grid row groups that will fit on a page.
+  def grid_row_groups
     height = layout_height - margin_bottom_pdf - margin_top_pdf
-    ((height - cell_size_pdf) / (cell_size_pdf + row_spacing_pdf).to_f).floor
+    group_height = cell_size_pdf * group_rows
+    
+    1 + ((height - group_height) /
+         (group_height + group_spacing_pdf).to_f).floor
+  end
+  
+  # Number of grid rows that will fit on a page.
+  def grid_rows
+    grid_row_groups * group_rows
   end
     
-  # Number of character squres in each row.
+  # Number of character squares in each row that will fit on a page.
   def grid_columns
     width = layout_width - margin_left_pdf - margin_right_pdf
     (width / cell_size_pdf.to_f).floor
@@ -130,7 +145,7 @@ class Paper < ActiveRecord::Base
   # Handy methods for converting from cm to PDF-native units.
   [
     :margin_top, :margin_bottom, :margin_left, :margin_right,
-    :cell_size, :row_spacing
+    :cell_size, :group_spacing
   ].each do |size|
     define_method :"#{size}_pdf" do
       cm2pt self.send(size)
@@ -140,5 +155,24 @@ class Paper < ActiveRecord::Base
     define_method :"#{size}_pdf" do
       mm2pt self.send(size)
     end
+  end
+  
+  def load_defaults
+    self.layout_name = 'LETTER'
+    self.margin_top = 2
+    self.margin_bottom = 1
+    self.margin_left = 2.5
+    self.margin_right = 2
+    
+    self.cell_size = 1.2
+    self.group_spacing = 1.32
+    self.group_rows = 1
+    
+    self.horizontal_guides = 0
+    self.vertical_guides = 0
+    self.diagonal_guides = false
+    
+    self.cell_stroke_size = 0.5
+    self.guide_stroke_size = 0.1
   end
 end

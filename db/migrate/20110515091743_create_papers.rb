@@ -13,7 +13,8 @@ class CreatePapers < ActiveRecord::Migration
       t.float :margin_right, :null => false
 
       t.float :cell_size, :null => false
-      t.float :row_spacing, :null => false
+      t.float :group_spacing, :null => false
+      t.integer :group_rows, :null => false
       
       t.integer :horizontal_guides, :null => false
       t.integer :vertical_guides, :null => false

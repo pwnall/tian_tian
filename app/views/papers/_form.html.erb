@@ -29,7 +29,7 @@
     <p class="field">
       <%= f.label :margin_top, 'Top margin' %>
       <span class="value">
-        <%= f.number_field :margin_top, :min => 0, :step => 0.1,
+        <%= f.number_field :margin_top, :min => 0, :step => 0.01,
                                         :required => true %>
       </span>
       <span class="comment">cm</span>
@@ -37,7 +37,7 @@
     <p class="field">
       <%= f.label :margin_bottom, 'Bottom margin' %>
       <span class="value">
-        <%= f.number_field :margin_bottom, :min => 0, :step => 0.1,
+        <%= f.number_field :margin_bottom, :min => 0, :step => 0.01,
                                            :required => true %>
       </span>
       <span class="comment">cm</span>
@@ -45,7 +45,7 @@
     <p class="field">
       <%= f.label :margin_left, 'Left margin' %>
       <span class="value">
-        <%= f.number_field :margin_left, :min => 0, :step => 0.1,
+        <%= f.number_field :margin_left, :min => 0, :step => 0.01,
                                          :required => true %>
       </span>
       <span class="comment">cm</span>
@@ -53,7 +53,7 @@
     <p class="field">
       <%= f.label :margin_right, 'Right margin' %>
       <span class="value">
-        <%= f.number_field :margin_right, :min => 0, :step => 0.1,
+        <%= f.number_field :margin_right, :min => 0, :step => 0.01,
                                           :required => true %>
       </span>
       <span class="comment">cm</span>
@@ -62,19 +62,27 @@
     <p class="field">
       <%= f.label :cell_size, 'Character square side' %>
       <span class="value">
-        <%= f.number_field :cell_size, :min => 0, :step => 0.1,
+        <%= f.number_field :cell_size, :min => 0, :step => 0.01,
                                        :required => true %>
       </span>
       <span class="comment">cm</span>
     </p>
     <p class="field">
-      <%= f.label :row_spacing, 'Space between rows of squares' %>
+      <%= f.label :group_spacing, 'Space between row groups' %>
       <span class="value">
-        <%= f.number_field :row_spacing, :min => 0, :step => 0.1,
-                                         :required => true %>
+        <%= f.number_field :group_spacing, :min => 0, :step => 0.01,
+                                           :required => true %>
       </span>
       <span class="comment">cm</span>
     </p>
+    <p class="field">
+      <%= f.label :group_rows, 'Character rows in a group' %>
+      <span class="value">
+        <%= f.number_field :group_rows, :min => 0, :step => 1,
+                                        :required => true %>
+      </span>
+    </p>
+
     <p class="field">
       <%= f.label :horizontal_guides,
                   'Horizontal guide lines inside a square' %>

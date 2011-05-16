@@ -32,6 +32,7 @@ class PapersController < ApplicationController
   # GET /papers/new.json
   def new
     @paper = Paper.new
+    @paper.load_defaults
 
     respond_to do |format|
       format.html # new.html.erb
