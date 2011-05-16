@@ -1,0 +1,21 @@
+<h2>Sheet Templates</h2>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Layout</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @papers.each do |paper| %>
+  <tr>
+    <td><%= paper.name %></td>
+    <td><%= paper.layout_name %></td>
+    <td><%= link_to 'Get PDF', paper_path(paper, :format => :pdf) %></td>
+    <td><%= link_to 'Edit', edit_paper_path(paper) %></td>
+    <td><%= link_to 'Destroy', paper, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

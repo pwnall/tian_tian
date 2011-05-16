@@ -1,0 +1,124 @@
+<%= form_for(@paper) do |f| %>
+  <% if @paper.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@paper.errors.count, "error") %> prohibited this paper from being saved:</h2>
+
+      <ul>
+      <% @paper.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <section class="fields">
+    <p class="field">
+      <%= f.label :name, 'Template name' %>
+      <span class="value">
+        <%= f.text_field :name, :required => true %>
+      </span>
+    </p>
+
+    <p class="field">
+      <%= f.label :layout_name, 'Paper layout' %>
+      <span class="value">
+        <%= f.select :layout_name, layout_name_options %>
+      </span>
+    </p>
+
+    <p class="field">
+      <%= f.label :margin_top, 'Top margin' %>
+      <span class="value">
+        <%= f.number_field :margin_top, :min => 0, :step => 0.1,
+                                        :required => true %>
+      </span>
+      <span class="comment">cm</span>
+    </p>
+    <p class="field">
+      <%= f.label :margin_bottom, 'Bottom margin' %>
+      <span class="value">
+        <%= f.number_field :margin_bottom, :min => 0, :step => 0.1,
+                                           :required => true %>
+      </span>
+      <span class="comment">cm</span>
+    </p>
+    <p class="field">
+      <%= f.label :margin_left, 'Left margin' %>
+      <span class="value">
+        <%= f.number_field :margin_left, :min => 0, :step => 0.1,
+                                         :required => true %>
+      </span>
+      <span class="comment">cm</span>
+    </p>
+    <p class="field">
+      <%= f.label :margin_right, 'Right margin' %>
+      <span class="value">
+        <%= f.number_field :margin_right, :min => 0, :step => 0.1,
+                                          :required => true %>
+      </span>
+      <span class="comment">cm</span>
+    </p>
+
+    <p class="field">
+      <%= f.label :cell_size, 'Character square side' %>
+      <span class="value">
+        <%= f.number_field :cell_size, :min => 0, :step => 0.1,
+                                       :required => true %>
+      </span>
+      <span class="comment">cm</span>
+    </p>
+    <p class="field">
+      <%= f.label :row_spacing, 'Space between rows of squares' %>
+      <span class="value">
+        <%= f.number_field :row_spacing, :min => 0, :step => 0.1,
+                                         :required => true %>
+      </span>
+      <span class="comment">cm</span>
+    </p>
+    <p class="field">
+      <%= f.label :horizontal_guides,
+                  'Horizontal guide lines inside a square' %>
+      <span class="value">
+        <%= f.number_field :horizontal_guides, :min => 0, :step => 1,
+                                               :required => true %>
+      </span>
+    </p>
+    <p class="field">
+      <%= f.label :vertical_guides,
+                  'Vertical guide lines inside a square' %>
+      <span class="value">
+        <%= f.number_field :vertical_guides, :min => 0, :step => 1,
+                                             :required => true %>
+      </span>
+    </p>
+    <p class="field">
+      <%= f.label :diagonal_guides,
+                  'Diagonal guide lines inside a square' %>
+      <span class="value">
+        <%= f.check_box :diagonal_guides %>
+        diagonal guides make up a cross in each square
+      </span>
+    </p>
+
+    <p class="field">
+      <%= f.label :cell_stroke_size, 'Width of character square borders' %>
+      <span class="value">
+        <%= f.number_field :cell_stroke_size, :min => 0, :step => 0.01,
+                                              :required => true %>
+      </span>
+      <span class="comment">mm</span>
+    </p>
+    <p class="field">
+      <%= f.label :guide_stroke_size, 'Width of guide lines inside squares' %>
+      <span class="value">
+        <%= f.number_field :guide_stroke_size, :min => 0, :step => 0.01,
+                                               :required => true %>
+      </span>
+      <span class="comment">mm</span>
+    </p>
+  </section>
+
+  <p class="actions">
+    <%= f.submit 'Save Template' %>
+  </p>
+<% end %>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Layout name:</b>
+  <%= @paper.layout_name %>
+</p>
+
+<p>
+  <b>Layout width:</b>
+  <%= @paper.layout_width %>
+</p>
+
+<p>
+  <b>Layout height:</b>
+  <%= @paper.layout_height %>
+</p>
+
+
+<%= link_to 'Edit', edit_paper_path(@paper) %> |
+<%= link_to 'Back', papers_path %>
