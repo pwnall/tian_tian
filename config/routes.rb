@@ -1,4 +1,6 @@
 TianTian::Application.routes.draw do
+  config_vars
+
   resources :papers
 
   # The priority is based upon order of creation:

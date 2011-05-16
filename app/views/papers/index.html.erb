@@ -3,7 +3,10 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Layout</th>
+    <th>Paper</th>
+    <th>Characters</th>
+    <th>Square size</th>
+    <th>Guide lines</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,9 +16,17 @@
   <tr>
     <td><%= paper.name %></td>
     <td><%= paper.layout_name %></td>
-    <td><%= link_to 'Get PDF', paper_path(paper, :format => :pdf) %></td>
+    <td><%= paper.grid_columns %> x <%= paper.grid_rows %></td>
+    <td><%= paper.cell_size %> cm</td>
+    <td>
+      <%= paper.horizontal_guides %> x <%= paper.vertical_guides %>
+      <% if paper.diagonal_guides %>
+        + diags
+      <% end %>
+    </td>
+    <td><%= link_to 'Generate PDF', paper_path(paper, :format => :pdf) %></td>
     <td><%= link_to 'Edit', edit_paper_path(paper) %></td>
-    <td><%= link_to 'Destroy', paper, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Delete', paper, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

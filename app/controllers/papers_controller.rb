@@ -1,4 +1,6 @@
 class PapersController < ApplicationController
+  config_vars_auth :except => [:index, :show]
+  
   # GET /papers
   # GET /papers.json
   def index
@@ -20,7 +22,7 @@ class PapersController < ApplicationController
       format.html # show.html.erb
       format.pdf do
         send_data @paper.to_pdf, :format => 'application/pdf',
-                                 :name => "#{@paper.name}.pdf"
+                                 :filename => "#{@paper.name}.pdf"
       end
       format.json { render :json => @paper }
     end
