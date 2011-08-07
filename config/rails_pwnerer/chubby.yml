@@ -1,4 +1,2 @@
 --- 
 dns_name: tiantian.pwnb.us
-frontends_per_core: 0
-frontends: 1
