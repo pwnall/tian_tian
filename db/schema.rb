@@ -20,22 +20,24 @@ ActiveRecord::Schema.define(:version => 20110515091743) do
   add_index "config_vars", ["name"], :name => "index_config_vars_on_name", :unique => true
 
   create_table "papers", :force => true do |t|
-    t.string   "name",              :null => false
-    t.string   "layout_name",       :null => false
-    t.float    "layout_width",      :null => false
-    t.float    "layout_height",     :null => false
-    t.float    "margin_top",        :null => false
-    t.float    "margin_bottom",     :null => false
-    t.float    "margin_left",       :null => false
-    t.float    "margin_right",      :null => false
-    t.float    "cell_size",         :null => false
-    t.float    "group_spacing",     :null => false
-    t.integer  "group_rows",        :null => false
-    t.integer  "horizontal_guides", :null => false
-    t.integer  "vertical_guides",   :null => false
-    t.boolean  "diagonal_guides",   :null => false
-    t.float    "cell_stroke_size",  :null => false
-    t.float    "guide_stroke_size", :null => false
+    t.string   "name",               :null => false
+    t.string   "layout_name",        :null => false
+    t.float    "layout_width",       :null => false
+    t.float    "layout_height",      :null => false
+    t.float    "margin_top",         :null => false
+    t.float    "margin_bottom",      :null => false
+    t.float    "margin_left",        :null => false
+    t.float    "margin_right",       :null => false
+    t.float    "cell_size",          :null => false
+    t.float    "group_spacing",      :null => false
+    t.integer  "group_rows",         :null => false
+    t.integer  "horizontal_guides",  :null => false
+    t.integer  "vertical_guides",    :null => false
+    t.boolean  "diagonal_guides",    :null => false
+    t.float    "cell_stroke_size",   :null => false
+    t.float    "guide_stroke_size",  :null => false
+    t.string   "cell_stroke_color",  :null => false
+    t.string   "guide_stroke_color", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

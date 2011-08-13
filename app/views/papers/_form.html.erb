@@ -117,12 +117,26 @@
       <span class="comment">mm</span>
     </p>
     <p class="field">
+      <%= f.label :cell_stroke_color, 'Color of character square borders' %>
+      <span class="value">
+        <%= f.text_field :cell_stroke_color, :required => true %>
+      </span>
+      <span class="comment">rrggbb</span>
+    </p>
+    <p class="field">
       <%= f.label :guide_stroke_size, 'Width of guide lines inside squares' %>
       <span class="value">
         <%= f.number_field :guide_stroke_size, :min => 0, :step => 0.01,
                                                :required => true %>
       </span>
       <span class="comment">mm</span>
+    </p>
+    <p class="field">
+      <%= f.label :guide_stroke_color, 'Color of guide lines inside squares' %>
+      <span class="value">
+        <%= f.text_field :guide_stroke_color, :required => true %>
+      </span>
+      <span class="comment">rrggbb</span>
     </p>
   </section>
 

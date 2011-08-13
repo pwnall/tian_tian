@@ -22,6 +22,9 @@ class CreatePapers < ActiveRecord::Migration
       
       t.float :cell_stroke_size, :null => false
       t.float :guide_stroke_size, :null => false
+      
+      t.string :cell_stroke_color, :null => false, :length => 6
+      t.string :guide_stroke_color, :null => false, :length => 6
 
       t.timestamps
     end

@@ -48,10 +48,19 @@ class Paper < ActiveRecord::Base
   
   # Width of the cell border lines, in mm.
   validates :cell_stroke_size, :numericality => { :greater_than => 0 },
-                                 :presence => true
+                               :presence => true
   # Width of the guide lines inside cells, in mm.
   validates :guide_stroke_size, :numericality => { :greater_than => 0 },
                                 :presence => true
+
+  # Color of the cell border lines, formated as rrggbb hex digits.
+  validates :cell_stroke_color, :format => /^[0-9a-f]{6}$/,
+                                :presence => true
+
+  # Color of the guide lines inside cells, formated as rrggbb hex digits.
+  validates :guide_stroke_color, :format => /^[0-9a-f]{6}$/,
+                                 :presence => true
+
 
   # :nodoc: auto-fills width and height
   def layout_name=(new_layout)
@@ -92,6 +101,8 @@ class Paper < ActiveRecord::Base
     top = bottom + cell_size_pdf
     
     # Guide lines.
+    old_stroke_color = pdf.stroke_color
+    pdf.stroke_color = guide_stroke_color
     pdf.line_width guide_stroke_size_pdf
     pdf.stroke do
       spacing = cell_size_pdf / (1 + horizontal_guides)
@@ -113,6 +124,7 @@ class Paper < ActiveRecord::Base
     end
 
     # Cell borders.
+    pdf.stroke_color = cell_stroke_color
     pdf.line_width cell_stroke_size_pdf
     pdf.stroke do
       pdf.rectangle [left, top], columns * cell_size_pdf, cell_size_pdf
@@ -120,6 +132,7 @@ class Paper < ActiveRecord::Base
         pdf.line left + cell_size_pdf * i, top, left + cell_size_pdf * i, bottom
       end
     end
+    pdf.stroke_color = old_stroke_color
   end
   
   # Number of grid row groups that will fit on a page.
@@ -174,5 +187,7 @@ class Paper < ActiveRecord::Base
     
     self.cell_stroke_size = 0.5
     self.guide_stroke_size = 0.1
+    self.cell_stroke_color = '000000'
+    self.guide_stroke_color = '666666'
   end
 end
