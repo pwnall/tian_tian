@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -38,8 +39,8 @@ ActiveRecord::Schema.define(:version => 20110515091743) do
     t.float    "guide_stroke_size",  :null => false
     t.string   "cell_stroke_color",  :null => false
     t.string   "guide_stroke_color", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   add_index "papers", ["name"], :name => "index_papers_on_name", :unique => true
